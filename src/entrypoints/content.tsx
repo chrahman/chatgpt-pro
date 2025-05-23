@@ -32,6 +32,7 @@ export default defineContentScript({
       position: "inline",
       anchor: "body",
       inheritStyles: true,
+      isolateEvents: ["keydown", "keyup", "keypress", "wheel", "scroll"],
       onMount: (container, shadow) => {
         // Container is a body, and React warns when creating a root on the body, so create a wrapper div
         const app = document.createElement("div");
@@ -42,7 +43,7 @@ export default defineContentScript({
         root.render(
           <ContentRoot>
             <AnswerModal />
-            <Toaster />
+            <Toaster position="top-center" />
           </ContentRoot>
         );
         return root;

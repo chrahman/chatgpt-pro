@@ -196,6 +196,11 @@ export default defineBackground(() => {
 
         await parseSSEResponse(response, (message) => {
           try {
+            // Skip processing if message is "[DONE]"
+            if (message === "[DONE]") {
+              return;
+            }
+
             const parsed = JSON.parse(message);
             const content = parsed?.message?.content as ResponseContent;
             const { text } = parseResponseContent(content);

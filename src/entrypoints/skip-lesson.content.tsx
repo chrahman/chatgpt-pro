@@ -3,7 +3,6 @@ import ReactDOM from "react-dom/client";
 import toast, { Toaster } from "react-hot-toast";
 import SkipLesson from "@/components/skip-lesson";
 import "@/assets/tailwind.css";
-import { PortalProvider } from "@/context/PortalContext";
 
 export default defineContentScript({
   matches: ["*://*.vu.edu.pk/*"],
@@ -16,6 +15,7 @@ export default defineContentScript({
       name: "skip-lesson-ui",
       position: "inline",
       anchor: "body",
+      isolateEvents: ["keydown", "keyup", "keypress", "wheel", "scroll"],
       onMount: (container, shadow) => {
         const root = ReactDOM.createRoot(container);
 
